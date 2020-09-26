@@ -1,6 +1,7 @@
 import BaseController from "../utils/BaseController.js";
 import auth0provider from "@bcwdev/auth0provider";
 import { bugService } from "../services/BugService.js";
+import { noteService } from "../services/NoteService.js";
 
 
 
@@ -12,8 +13,17 @@ export class BugsController extends BaseController {
       .get('', this.getAll)
       .get('/:id', this.getById)
       .use(auth0provider.getAuthorizedUserInfo)
+      .get('/:id/notes', this.getNotesByBugId)
       .post('', this.create)
       .put('/:id', this.edit)
+  }
+  async getNotesByBugId(req, res, next) {
+    try {
+      let data = await noteService.getNotesByBugId({ bug: req.params.id })
+      return res.send(data)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getAll(req, res, next) {
