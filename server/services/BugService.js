@@ -12,16 +12,18 @@ class BugService {
     if (!data) {
       throw new BadRequest("Invalid Id")
     }
+    return data
   }
   async create(rawData) {
     let data = await dbContext.Bugs.create(rawData)
     return data
   }
-  async edit(id, userEmail, update) {
-    let data = await dbContext.Bugs.findOneAndUpdate({ id: id, creatorEmail: userEmail }, update, { new: true })
-    if (!data) {
+  async edit(id, userEmail, body) {
+    let update = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, body, { new: true })
+    if (!update) {
       throw new BadRequest("Invalid Id or you do not own this Bug Log Input")
     }
+    return update
   }
 
 }

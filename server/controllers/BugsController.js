@@ -37,6 +37,7 @@ export class BugsController extends BaseController {
     try {
       req.body.creatorEmail = req.userInfo.email
       let data = await bugService.create(req.body)
+      return res.send(data)
     } catch (error) {
       next(error)
     }
