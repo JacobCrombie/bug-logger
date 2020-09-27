@@ -60,6 +60,19 @@
               >
                 Add Note
               </button>
+              <form @submit.prevent="addNote" v-if="noteToggle">
+                <div class="form-group form-inline">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Add Note..."
+                    v-model="noteData.content"
+                  />
+                  <button class="btn btn-success" type="submit">
+                    Add Note
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -80,6 +93,7 @@ export default {
   data() {
     return {
       noteToggle: false,
+      noteData: {},
     };
   },
   computed: {
@@ -96,6 +110,14 @@ export default {
         closed: true,
         id: this.$route.params.id,
       });
+    },
+    addNote() {
+      this.$store.dispatch("addNote", {
+        bug: this.$route.params.id,
+        content: this.noteData.content,
+      });
+      this.noteData = {};
+      this.noteToggle = !this.noteToggle;
     },
   },
   components: {
