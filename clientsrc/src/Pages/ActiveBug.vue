@@ -56,7 +56,7 @@
               <button
                 class="btn btn-success"
                 @click="noteToggle = !noteToggle"
-                v-if="!noteToggle"
+                v-if="!noteToggle && this.profile.email"
               >
                 Add Note
               </button>
@@ -102,6 +102,9 @@ export default {
     },
     notes() {
       return this.$store.state.notes;
+    },
+    profile() {
+      return this.$store.state.profile;
     },
   },
   methods: {

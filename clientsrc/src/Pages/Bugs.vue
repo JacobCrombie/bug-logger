@@ -24,7 +24,7 @@
       <div class="col">
         <button
           class="btn btn-danger"
-          v-if="!bugToggle"
+          v-if="!bugToggle && this.profile.email"
           @click="bugToggle = !bugToggle"
         >
           Report Bug
@@ -72,6 +72,9 @@ export default {
   computed: {
     bugs() {
       return this.$store.state.bugs;
+    },
+    profile() {
+      return this.$store.state.profile;
     },
   },
   methods: {

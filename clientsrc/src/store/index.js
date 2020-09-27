@@ -99,6 +99,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    async deleteNote({ commit, dispatch }, noteData) {
+      try {
+        await api.delete('notes/' + noteData.id)
+        dispatch('getNotesByBugId', noteData.bug)
+      } catch (error) {
+        console.error(error);
+      }
     }
     //#endregion
   }

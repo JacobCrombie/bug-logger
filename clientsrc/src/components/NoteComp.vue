@@ -3,7 +3,13 @@
     <li class="d-flex mt-2">
       <h5 class="col-3 p-0">{{ noteProp.creatorEmail }}</h5>
       <h5 class="col-9 p-0">{{ noteProp.content }}</h5>
-      <h5 class="col-1 p-0"><i class="fa fa-trash cursor text-danger"></i></h5>
+      <h5 class="col-1 p-0">
+        <i
+          class="fa fa-trash cursor text-danger"
+          @click="deleteNote"
+          v-if="noteProp.creatorEmail == profile.email"
+        ></i>
+      </h5>
     </li>
   </div>
 </template>
@@ -16,8 +22,16 @@ export default {
   data() {
     return {};
   },
-  computed: {},
-  methods: {},
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+  },
+  methods: {
+    deleteNote() {
+      this.$store.dispatch("deleteNote", this.noteProp);
+    },
+  },
   components: {},
 };
 </script>
