@@ -58,8 +58,9 @@ export default new Vuex.Store({
     },
     async addBug({ commit, dispatch }, bugData) {
       try {
-        await api.post('bugs', bugData)
+        let res = await api.post('bugs', bugData)
         dispatch("getAllBugs")
+        dispatch('getBugById', res.data.id)
       } catch (error) {
         console.error(error);
       }
@@ -104,6 +105,14 @@ export default new Vuex.Store({
       try {
         await api.delete('notes/' + noteData.id)
         dispatch('getNotesByBugId', noteData.bug)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editNote({ commit, dispatch }, editData) {
+      try {
+        await api.put('notes/' + editData.id, { content: editData.content })
+        dispatch('getNotesByBugId', editData.bug)
       } catch (error) {
         console.error(error);
       }

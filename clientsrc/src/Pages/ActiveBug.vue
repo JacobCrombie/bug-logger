@@ -23,7 +23,11 @@
           <h5>{{ bug.description }}</h5>
         </div>
         <div class="col d-flex justify-content-end">
-          <button class="btn btn-danger mt-2" @click="closeBug">
+          <button
+            class="btn btn-danger mt-2"
+            @click="closeBug"
+            v-if="bug.creatorEmail == profile.email"
+          >
             Close Bug
           </button>
         </div>
