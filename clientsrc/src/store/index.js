@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router";
 import { api } from "./AxiosService"
+import ns from "../services/NotificationService.js"
 
 Vue.use(Vuex);
 
@@ -76,8 +77,10 @@ export default new Vuex.Store({
     },
     async editBug({ commit, dispatch }, bug) {
       try {
-        await api.put('bugs/' + bug.id, { closed: bug.closed })
-        dispatch('getBugById', bug.id)
+        if (await ns.confirmAction("Do you want to CLOSE Bug?", "You won't be able to edit or re-open bug after CLOSE!", "Confirm BUGCLOSE")) {
+          await api.put('bugs/' + bug.id, { closed: bug.closed })
+          dispatch('getBugById', bug.id)
+        }
       } catch (error) {
         console.error(error);
       }
@@ -103,16 +106,20 @@ export default new Vuex.Store({
     },
     async deleteNote({ commit, dispatch }, noteData) {
       try {
-        await api.delete('notes/' + noteData.id)
-        dispatch('getNotesByBugId', noteData.bug)
+        if (await ns.confirmAction("Do you want this note deleted?", "You won't be able to revert this.")) {
+          await api.delete('notes/' + noteData.id)
+          dispatch('getNotesByBugId', noteData.bug)
+        }
       } catch (error) {
         console.error(error);
       }
     },
     async editNote({ commit, dispatch }, editData) {
       try {
-        await api.put('notes/' + editData.id, { content: editData.content })
-        dispatch('getNotesByBugId', editData.bug)
+        if (await ns.confirmAction("Do you want to edit this note?", "You won't be able to revert changes.", "Yes, perform edit.")) {
+          await api.put('notes/' + editData.id, { content: editData.content })
+          dispatch('getNotesByBugId', editData.bug)
+        }
       } catch (error) {
         console.error(error);
       }
