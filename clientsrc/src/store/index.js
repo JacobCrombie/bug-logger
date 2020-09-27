@@ -9,14 +9,24 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    profile: {}
+    profile: {},
+    bugs: [],
+    notes: [],
+    activeBug: {}
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
+    },
+    setBugs(state, bugs) {
+      state.bugs = bugs
+    },
+    setActiveBug(state, bug) {
+      state.activeBug = bug
     }
   },
   actions: {
+    //#region  //AUTH0 and Profile
     setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
@@ -30,6 +40,40 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    //#endregion
+
+
+    //#region Bugs 
+    async getAllBugs({ commit, dispatch }) {
+      try {
+        let res = await api.get('bugs')
+        commit("setBugs", res.data)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addBug({ commit, dispatch }, bugData) {
+      try {
+        await api.post('bugs', bugData)
+        dispatch("getAllBugs")
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getBugById({ commit, dispatch }, bugId) {
+      try {
+        let res = await api.get('bugs/' + bugId)
+        commit('setActiveBug', res.data)
+        router.push({ name: "ActiveBug", params: { id: res.data.id } })
+      } catch (error) {
+        console.error(error);
+      }
     }
+    //#endregion
+
+    //#region Notes
+
+    //#endregion
   }
 });

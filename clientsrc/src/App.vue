@@ -10,6 +10,9 @@ import Navbar from "@/components/navbar";
 import { onAuth } from "@bcwdev/auth0-vue";
 export default {
   name: "App",
+  mounted() {
+    this.$store.dispatch("getProfile");
+  },
   async beforeCreate() {
     await onAuth();
     if (this.$auth.isAuthenticated) {
