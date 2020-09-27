@@ -1,7 +1,7 @@
 <template>
   <div class="note-comp">
     <li class="d-flex mt-2">
-      <h5 class="col-3 p-0">
+      <h5 class="col-3 p-0 align-self-center">
         {{ noteProp.creatorEmail }}
       </h5>
       <form
@@ -27,7 +27,7 @@
         ></i>
         {{ noteProp.content }}
       </h5>
-      <h5 class="col-1 p-0">
+      <h5 class="col-1 p-0 align-self-center">
         <i
           class="fa fa-trash cursor text-danger"
           @click="deleteNote"
