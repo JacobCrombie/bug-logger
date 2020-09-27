@@ -34,20 +34,33 @@
         <div class="col">
           <h2>Notes</h2>
         </div>
-        <div class="col-10 offset-1 mt-3 border">
-          <div class="d-flex">
-            <h3 class="col-3 p-0">Name</h3>
-            <h3 class="col-8 p-0">Message</h3>
-            <h3 class="col-1 p-0">Delete</h3>
-          </div>
-          <div class="d-flex">
-            <ul class="col">
-              <note-comp
-                v-for="note in notes"
-                :key="note.id"
-                :noteProp="note"
-              />
-            </ul>
+        <div class="justify-content-center d-flex">
+          <div class="col-11 mt-3">
+            <div class="col border">
+              <div class="d-flex border-bottom">
+                <h3 class="col-3 p-0">Name</h3>
+                <h3 class="col-8 p-0">Message</h3>
+                <h3 class="col-1 p-0">Delete</h3>
+              </div>
+              <div class="d-flex">
+                <ul class="col">
+                  <note-comp
+                    v-for="note in notes"
+                    :key="note.id"
+                    :noteProp="note"
+                  />
+                </ul>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-end mt-2">
+              <button
+                class="btn btn-success"
+                @click="noteToggle = !noteToggle"
+                v-if="!noteToggle"
+              >
+                Add Note
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -61,10 +74,13 @@ import NoteComp from "../components/NoteComp.vue";
 export default {
   name: "active-bug",
   mounted() {
+    this.$store.dispatch("getBugById", this.$route.params.id);
     this.$store.dispatch("getNotesByBugId", this.$route.params.id);
   },
   data() {
-    return {};
+    return {
+      noteToggle: false,
+    };
   },
   computed: {
     bug() {
