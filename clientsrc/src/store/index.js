@@ -69,6 +69,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    async editBug({ commit, dispatch }, bug) {
+      try {
+        await api.put('bugs/' + bug.id, { closed: bug.closed })
+        dispatch('getBugById', bug.id)
+      } catch (error) {
+        console.error(error);
+      }
     }
     //#endregion
 
