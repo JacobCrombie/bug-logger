@@ -1,5 +1,5 @@
 <template>
-  <div class="active-bug container-fluid">
+  <div class="active-bug container">
     <div class="row">
       <div class="col">
         <div>
@@ -29,19 +29,49 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col mt-5">
+        <div class="col">
+          <h2>Notes</h2>
+        </div>
+        <div class="col-10 offset-1 mt-3 border">
+          <div class="d-flex">
+            <h3 class="col-3 p-0">Name</h3>
+            <h3 class="col-8 p-0">Message</h3>
+            <h3 class="col-1 p-0">Delete</h3>
+          </div>
+          <div class="d-flex">
+            <ul class="col">
+              <note-comp
+                v-for="note in notes"
+                :key="note.id"
+                :noteProp="note"
+              />
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 
 <script>
+import NoteComp from "../components/NoteComp.vue";
 export default {
   name: "active-bug",
+  mounted() {
+    this.$store.dispatch("getNotesByBugId", this.$route.params.id);
+  },
   data() {
     return {};
   },
   computed: {
     bug() {
       return this.$store.state.activeBug;
+    },
+    notes() {
+      return this.$store.state.notes;
     },
   },
   methods: {
@@ -52,7 +82,9 @@ export default {
       });
     },
   },
-  components: {},
+  components: {
+    NoteComp,
+  },
 };
 </script>
 
