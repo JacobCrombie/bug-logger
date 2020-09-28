@@ -10,7 +10,10 @@
         <div class="d-flex border">
           <h2 class="col-3">Title</h2>
           <h2 class="col-3">Reported By</h2>
-          <h2 class="col-3">Status <i class="fa fa-chevron-right"></i></h2>
+          <h2 class="col-3">
+            Status
+            <i class="fa fa-chevron-right cursor"></i>
+          </h2>
           <h2 class="col-3">Last Modified</h2>
         </div>
         <div class="d-flex">
@@ -105,5 +108,8 @@ export default {
 }
 .d-input {
   width: 50vh !important;
+}
+.cursor {
+  cursor: pointer;
 }
 </style>
