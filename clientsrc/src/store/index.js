@@ -75,11 +75,21 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async editBug({ commit, dispatch }, bug) {
+    async closeBug({ commit, dispatch }, bug) {
       try {
         if (await ns.confirmAction("Do you want to CLOSE Bug?", "You won't be able to edit or re-open bug after CLOSE!", "Confirm BUGCLOSE")) {
           await api.put('bugs/' + bug.id, { closed: bug.closed })
           dispatch('getBugById', bug.id)
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editBugData({ commit, dispatch }, bugData) {
+      try {
+        if (await ns.confirmAction("Do you want to edit bug data?", "You won't be able to revert to original!", "Edit Bug Data")) {
+          await api.put('bugs/' + bugData.id, { title: bugData.title, description: bugData.description })
+          dispatch('getBugById', bugData.id)
         }
       } catch (error) {
         console.error(error);

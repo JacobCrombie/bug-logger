@@ -22,11 +22,39 @@
         <div class="col border mt-2">
           <h5>{{ bug.description }}</h5>
         </div>
-        <div class="col d-flex justify-content-end">
+        <div class="col d-flex justify-content-between">
+          <button
+            class="btn btn-warning mt-2"
+            @click="editToggle = !editToggle"
+            v-if="
+              bug.creatorEmail == profile.email && !bug.closed && !editToggle
+            "
+          >
+            Edit Bug
+          </button>
+          <form @submit.prevent="editBug" v-if="editToggle">
+            <div class="form-group form-inline mt-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="New title..."
+                v-model="editData.title"
+              />
+              <input
+                type="text"
+                class="form-control mx-1"
+                placeholder="New description..."
+                v-model="editData.description"
+              />
+              <button class="btn btn-warning" type="submit">Edit Bug</button>
+            </div>
+          </form>
           <button
             class="btn btn-danger mt-2"
             @click="closeBug"
-            v-if="bug.creatorEmail == profile.email && !bug.closed"
+            v-if="
+              bug.creatorEmail == profile.email && !bug.closed && !editToggle
+            "
           >
             Close Bug
           </button>
@@ -98,6 +126,8 @@ export default {
     return {
       noteToggle: false,
       noteData: {},
+      editToggle: false,
+      editData: {},
     };
   },
   computed: {
@@ -113,7 +143,7 @@ export default {
   },
   methods: {
     closeBug() {
-      this.$store.dispatch("editBug", {
+      this.$store.dispatch("closeBug", {
         closed: true,
         id: this.$route.params.id,
       });
@@ -125,6 +155,15 @@ export default {
       });
       this.noteData = {};
       this.noteToggle = !this.noteToggle;
+    },
+    editBug() {
+      this.$store.dispatch("editBugData", {
+        title: this.editData.title,
+        description: this.editData.description,
+        id: this.$route.params.id,
+      });
+      this.editData = {};
+      this.editToggle = !this.editToggle;
     },
   },
   components: {
