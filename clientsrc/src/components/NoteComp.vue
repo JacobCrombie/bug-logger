@@ -1,11 +1,11 @@
 <template>
   <div class="note-comp">
-    <li class="d-flex mt-2">
+    <li class="d-flex mt-2 border-bottom">
       <h5 class="col-3 p-0 align-self-center">
         {{ noteProp.creatorEmail }}
       </h5>
       <form
-        class="col-9 p-0"
+        class="col-8 p-0"
         @submit.prevent="editNote"
         v-if="editToggle && noteProp.creatorEmail == profile.email"
       >
@@ -19,7 +19,7 @@
           <button type="submit" class="btn btn-warning">Edit</button>
         </div>
       </form>
-      <h5 class="col-9 p-0" v-if="!editToggle">
+      <h5 class="col-8 p-0" v-if="!editToggle">
         <i
           class="fa fa-user-edit mr-1"
           @click="editToggle = !editToggle"
@@ -79,5 +79,9 @@ export default {
 }
 input {
   width: 70% !important;
+}
+.border-bottom{
+  border-color: black !important;
+  border-width: thin !important;
 }
 </style>

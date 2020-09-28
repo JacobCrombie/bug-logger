@@ -19,7 +19,7 @@
             <h1 class="t-green" v-if="!bug.closed">Open</h1>
           </div>
         </div>
-        <div class="col border mt-2">
+        <div class="col border mt-2 card bg-light text-dark">
           <h5>{{ bug.description }}</h5>
         </div>
         <div class="col d-flex justify-content-between">
@@ -68,11 +68,11 @@
         </div>
         <div class="justify-content-center d-flex">
           <div class="col-11 mt-3">
-            <div class="col border">
+            <div class="col border card bg-secondary text-light">
               <div class="d-flex border-bottom">
                 <h3 class="col-3 p-0">Name</h3>
-                <h3 class="col-8 p-0">Message</h3>
-                <h3 class="col-1 p-0">Delete</h3>
+                <h3 class="col-7 p-0">Message</h3>
+                <h3 class="col-2 p-0">Delete</h3>
               </div>
               <div class="d-flex">
                 <ul class="col">
@@ -188,5 +188,13 @@ export default {
 }
 .t-green {
   color: green;
+}
+.border{
+  border-color: black !important;
+  border-width: medium !important;
+}
+.border-bottom{
+  border-color: rgb(104, 0, 0) !important;
+  border-width: medium !important;
 }
 </style>

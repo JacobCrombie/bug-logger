@@ -6,8 +6,8 @@
       </h1>
     </div>
     <div class="row">
-      <div class="card col">
-        <div class="d-flex border">
+      <div class="card col border bg-light">
+        <div class="d-flex border-bottom">
           <h2 class="col-3">Title</h2>
           <h2 class="col-3">Reported By</h2>
           <h2 class="col-3">
@@ -18,7 +18,7 @@
           <h2 class="col-3">Last Modified</h2>
         </div>
         <div class="d-flex">
-          <ul class="col mt-3 border">
+          <ul class="col mt-3">
             <bug-comp v-for="bug in bugs" :key="bug.id" :bugProp="bug" />
           </ul>
         </div>
@@ -122,5 +122,13 @@ export default {
 }
 .cursor {
   cursor: pointer;
+}
+.border{
+  border-color: black !important;
+  border-width: medium !important;
+}
+.border-bottom{
+    border-color: rgb(104, 0, 0) !important;
+  border-width: medium !important;
 }
 </style>
