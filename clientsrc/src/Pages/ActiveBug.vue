@@ -26,7 +26,7 @@
           <button
             class="btn btn-danger mt-2"
             @click="closeBug"
-            v-if="bug.creatorEmail == profile.email"
+            v-if="bug.creatorEmail == profile.email && !bug.closed"
           >
             Close Bug
           </button>
