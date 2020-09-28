@@ -12,7 +12,8 @@
           <h2 class="col-3">Reported By</h2>
           <h2 class="col-3">
             Status
-            <i class="fa fa-chevron-right cursor"></i>
+            <i class="fa fa-chevron-up cursor" @click="sortBugs" v-if="!sortToggle"></i>
+            <i class="fa fa-chevron-down cursor" @click="sortBugs2" v-if="sortToggle"></i>
           </h2>
           <h2 class="col-3">Last Modified</h2>
         </div>
@@ -70,10 +71,12 @@ export default {
     return {
       bugToggle: false,
       addBugData: {},
+      sortToggle: false,
     };
   },
   computed: {
     bugs() {
+
       return this.$store.state.bugs;
     },
     profile() {
@@ -89,6 +92,14 @@ export default {
       this.addBugData = {};
       this.bugToggle = !this.bugToggle;
     },
+    sortBugs(){
+      this.bugs.sort((a,b)=> (a.closed > b.closed)? 1: -1)
+      this.sortToggle = !this.sortToggle
+    },
+    sortBugs2(){
+      this.bugs.sort((a,b)=> (a.closed < b.closed)? 1: -1)
+      this.sortToggle = !this.sortToggle
+    }
   },
   components: {
     BugComp,

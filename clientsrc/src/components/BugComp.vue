@@ -5,7 +5,7 @@
       <h4 class="col-3">{{ bugProp.creatorEmail }}</h4>
       <h4 class="col-3 t-red" v-if="bugProp.closed">Closed</h4>
       <h4 class="col-3 t-green" v-if="!bugProp.closed">Open</h4>
-      <h4 class="col-3">{{ bugProp.updatedAt }}</h4>
+      <h4 class="col-3">{{ this.date }}</h4>
     </li>
   </div>
 </template>
@@ -18,7 +18,12 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    date(){
+      let dateArr = this.bugProp.updatedAt.split('T')
+      return dateArr[0]
+    }
+  },
   methods: {
     setActiveBug() {
       this.$store.dispatch("getBugById", this.bugProp.id);
