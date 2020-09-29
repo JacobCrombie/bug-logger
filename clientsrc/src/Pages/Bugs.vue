@@ -1,7 +1,7 @@
 <template>
   <div class="bugs container-fluid">
     <div class="row">
-      <h1 class="col text-center mt-3 text-under font-weight-bold">
+      <h1 class="col text-center my-5 text-under font-weight-bold">
         Current Bugs
       </h1>
     </div>
@@ -12,10 +12,18 @@
           <h2 class="col-3">Reported By</h2>
           <h2 class="col-3">
             Status
-            <i class="fa fa-chevron-up cursor" @click="sortBugs" v-if="!sortToggle"></i>
-            <i class="fa fa-chevron-down cursor" @click="sortBugs2" v-if="sortToggle"></i>
+            <i
+              class="fa fa-chevron-up cursor"
+              @click="sortBugs"
+              v-if="!sortToggle"
+            ></i>
+            <i
+              class="fa fa-chevron-down cursor"
+              @click="sortBugs2"
+              v-if="sortToggle"
+            ></i>
           </h2>
-          <h2 class="col-3">Last Modified</h2>
+          <h2 class="col-3 text-center">Last Modified</h2>
         </div>
         <div class="d-flex">
           <ul class="col mt-3">
@@ -76,7 +84,6 @@ export default {
   },
   computed: {
     bugs() {
-
       return this.$store.state.bugs;
     },
     profile() {
@@ -92,14 +99,14 @@ export default {
       this.addBugData = {};
       this.bugToggle = !this.bugToggle;
     },
-    sortBugs(){
-      this.bugs.sort((a,b)=> (a.closed > b.closed)? 1: -1)
-      this.sortToggle = !this.sortToggle
+    sortBugs() {
+      this.bugs.sort((a, b) => (a.closed > b.closed ? 1 : -1));
+      this.sortToggle = !this.sortToggle;
     },
-    sortBugs2(){
-      this.bugs.sort((a,b)=> (a.closed < b.closed)? 1: -1)
-      this.sortToggle = !this.sortToggle
-    }
+    sortBugs2() {
+      this.bugs.sort((a, b) => (a.closed < b.closed ? 1 : -1));
+      this.sortToggle = !this.sortToggle;
+    },
   },
   components: {
     BugComp,
@@ -114,21 +121,24 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.text-under {
-  text-decoration: underline;
-}
+
 .d-input {
   width: 50vh !important;
 }
 .cursor {
   cursor: pointer;
 }
-.border{
+.border {
   border-color: black !important;
   border-width: medium !important;
 }
-.border-bottom{
-    border-color: rgb(104, 0, 0) !important;
+.border-bottom {
+  border-color: rgb(104, 0, 0) !important;
   border-width: medium !important;
+}
+h1 {
+  font-size: 100px;
+  color: whitesmoke;
+  text-shadow: 7px 6px 6px black;
 }
 </style>
