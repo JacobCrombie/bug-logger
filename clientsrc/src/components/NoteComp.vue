@@ -22,7 +22,7 @@
       <h5 class="col-8 p-0" v-if="!editToggle">
         <i
           class="fa fa-user-edit mr-1"
-          @click="editToggle = !editToggle"
+          @click="editToggle = !editToggle ; editNoteData.content=noteProp.content"
           v-if="!editToggle && noteProp.creatorEmail == profile.email"
         ></i>
         {{ noteProp.content }}
