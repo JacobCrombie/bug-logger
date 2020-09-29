@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="col border mt-2 card bg-light text-dark">
-          <h5>{{ bug.description }}</h5>
+          <h5 class="indent">{{ bug.description }}</h5>
         </div>
         <div class="col d-flex justify-content-between">
           <button
@@ -184,17 +184,22 @@ export default {
   font-size: 60pt;
 }
 .t-red {
-  color: red;
+  color: darkred;
+  text-shadow: 2px 3px 6px red;
 }
 .t-green {
   color: green;
+  text-shadow: 2px 3px 6px chartreuse;
 }
-.border{
+.border {
   border-color: black !important;
   border-width: medium !important;
 }
-.border-bottom{
+.border-bottom {
   border-color: rgb(104, 0, 0) !important;
   border-width: medium !important;
+}
+.indent {
+  text-indent: 8%;
 }
 </style>

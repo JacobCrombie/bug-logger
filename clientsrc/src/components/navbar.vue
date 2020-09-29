@@ -1,7 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <router-link class="navbar-brand" :to="{ name: 'Bugs' }"
-      >AppName</router-link
+    <router-link class="navbar-brand d-flex" :to="{ name: 'Bugs' }"
+      ><img src="../assets/pngwing.png" alt="" />
+      <h1 class="align-self-center">Tracker</h1></router-link
     >
     <button
       class="navbar-toggler"

@@ -1,11 +1,11 @@
 <template>
   <div class="bug-comp">
-    <li class="d-flex border cursor" @click="setActiveBug">
+    <li class="d-flex border cursor mt-3 grow" @click="setActiveBug">
       <h4 class="col-3">{{ bugProp.title }}</h4>
       <h4 class="col-3">{{ bugProp.creatorEmail }}</h4>
       <h4 class="col-3 t-red" v-if="bugProp.closed">Closed</h4>
       <h4 class="col-3 t-green" v-if="!bugProp.closed">Open</h4>
-      <h4 class="col-3">{{ this.date }}</h4>
+      <h4 class="col-3 text-center">{{ this.date }}</h4>
     </li>
   </div>
 </template>
@@ -19,10 +19,10 @@ export default {
     return {};
   },
   computed: {
-    date(){
-      let dateArr = this.bugProp.updatedAt.split('T')
-      return dateArr[0]
-    }
+    date() {
+      let dateArr = this.bugProp.updatedAt.split("T");
+      return dateArr[0];
+    },
   },
   methods: {
     setActiveBug() {
@@ -43,5 +43,15 @@ export default {
 }
 .cursor {
   cursor: pointer;
+}
+.border {
+  border-color: black !important;
+}
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.02);
+  background-color: cornflowerblue;
 }
 </style>
